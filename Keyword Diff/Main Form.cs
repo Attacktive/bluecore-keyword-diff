@@ -11,9 +11,9 @@ namespace Keyword_Diff {
 		private static readonly char[] Delimiters = { '|', '\t', ' ' };
 		private static readonly char[] DelimitersIncludingNewlines = { '|', '\t', ' ', '\r', '\n' };
 
-		private StringBuilder _intersectionBuilder;
-		private StringBuilder _aMinusBBuilder;
-		private StringBuilder _bMinusABuilder;
+		private StringBuilder? _intersectionBuilder;
+		private StringBuilder? _aMinusBBuilder;
+		private StringBuilder? _bMinusABuilder;
 
 		public MainForm() {
 			InitializeComponent();
@@ -90,9 +90,9 @@ namespace Keyword_Diff {
 			IEnumerable<string> leftKeywords = leftLine.Trim().Split(Delimiters, StringSplitOptions.RemoveEmptyEntries);
 			IEnumerable<string> rightKeywords = rightLine.Trim().Split(Delimiters, StringSplitOptions.RemoveEmptyEntries);
 
-			_aMinusBBuilder.AppendLine(AMinusB(leftKeywords, rightKeywords));
-			_intersectionBuilder.AppendLine(Intersect(leftKeywords, rightKeywords));
-			_bMinusABuilder.AppendLine(BMinusA(leftKeywords, rightKeywords));
+			_aMinusBBuilder!.AppendLine(AMinusB(leftKeywords, rightKeywords));
+			_intersectionBuilder!.AppendLine(Intersect(leftKeywords, rightKeywords));
+			_bMinusABuilder!.AppendLine(BMinusA(leftKeywords, rightKeywords));
 		}
 
 		private void TextBoxInput_TextChanged(object sender, EventArgs e) {
@@ -164,10 +164,10 @@ namespace Keyword_Diff {
 		private static string DelimitersToNewlines(string source) {
 			var regexBuilder = new StringBuilder("[");
 			foreach (var delimiter in DelimitersIncludingNewlines) {
-				regexBuilder.Append(@"\").Append(delimiter);
+				regexBuilder.Append('\\').Append(delimiter);
 			}
 
-			regexBuilder.Append("]");
+			regexBuilder.Append(']');
 
 			return Regex.Replace(source, regexBuilder.ToString(), Environment.NewLine);
 		}
