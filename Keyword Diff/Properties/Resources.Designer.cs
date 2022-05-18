@@ -59,5 +59,14 @@ namespace Keyword_Diff.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to pipes to newlines.
+        /// </summary>
+        internal static string LabelPipesToNewlines {
+            get {
+                return ResourceManager.GetString("LabelPipesToNewlines", resourceCulture);
+            }
+        }
     }
 }
