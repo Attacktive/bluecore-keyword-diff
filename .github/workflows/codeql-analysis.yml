@@ -75,7 +75,7 @@ jobs:
 
     - run: |
         echo "Run, Build Application using script"
-        msbuild build /p:UseSharedCompilation=false
+        dotnet msbuild /p:UseSharedCompilation=false
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
